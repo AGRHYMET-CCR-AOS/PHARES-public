@@ -10,7 +10,7 @@ This repository contains public resources related to:
 - practical exercises;
 - workshop resources;
 - operational support documentation;
-- and the PHARES Wiki.
+- and the [PHARES Wiki](https://github.com/AGRHYMET-CCR-AOS/PHARES-public/wiki).
 
 ## Repository Structure
 
