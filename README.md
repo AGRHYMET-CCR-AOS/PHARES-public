@@ -1,4 +1,4 @@
-cat > README.md << 'EOF'
+
 # PHARES Public Repository
 
 Welcome to the public repository of the PHARES forecasting and early warning platform.
