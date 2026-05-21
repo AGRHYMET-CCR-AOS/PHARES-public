@@ -1,7 +1,7 @@
 # ============================================================
 # Daily hydrological bulletin rendering
 # ============================================================
-
+project_dir <- "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin"
 time_ref <- format(Sys.Date(), "%Y%m%d")
 
 # ============================================================
@@ -68,6 +68,7 @@ file.copy(
 # ============================================================
 # Render bulletin
 # ============================================================
+initial_dir <- getwd()
 setwd(daily_word_dir)
 quarto::quarto_render(
   input = "bulletin_hydrologique.qmd",
@@ -85,7 +86,7 @@ doconv::docx2pdf(
   output = pdf_output_file
 )
 
-setwd("../../..")
+setwd(initial_dir)
 
 # ============================================================
 # Clean temporary rendering directory

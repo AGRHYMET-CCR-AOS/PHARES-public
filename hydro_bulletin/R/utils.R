@@ -155,6 +155,114 @@ format_risk_level <- function(x) {
   )
 }
 
+# build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
+#                              variable = "risk",
+#                              map_type = c("risk", "discharge"),
+#                              facet = FALSE,
+#                              facet_var = "leadtime",
+#                              nrow = NULL,
+#                              annotation_scale_location = c("bl","br","tl","tr"),
+#                              north_arrow_size = 1.5,
+#                              title_size=12,
+#                              legend_title = NULL) {
+#   
+#   map_type <- match.arg(map_type)
+#   
+#   if (is.null(legend_title)) {
+#     legend_title <- ifelse(map_type == "risk", "Risk level", "Discharge (m³/s)")
+#   }
+#   
+#   p <- ggplot2::ggplot() +
+#     ggplot2::geom_sf(
+#       data = data,
+#       ggplot2::aes(fill = .data[[variable]]),
+#       color = NA,
+#       linewidth = 0
+#     ) +
+#     ggplot2::geom_sf(
+#       data = country,
+#       fill = NA,
+#       linewidth = 0.2
+#     ) +
+#     ggplot2::xlab("Longitude") +
+#     ggplot2::ylab("Latitude") +
+#     ggplot2::theme_minimal() +
+#     ggplot2::theme(
+#       strip.text.x.top = element_text(size=title_size, face = "bold"),
+#       text = ggplot2::element_text(size = 14),
+#       axis.text = ggplot2::element_text(size = 14),
+#       axis.title.x = ggplot2::element_text(size = 15, face = "bold"),
+#       axis.title.y = ggplot2::element_text(size = 15, face = "bold"),
+#       plot.title = ggplot2::element_text(face = "bold", size = 20),
+#       legend.position = "bottom",
+#       legend.key.width = grid::unit(2, "cm"),
+#       panel.background = ggplot2::element_rect(fill = "white"),
+#       panel.grid.major = ggplot2::element_line(color = "grey90", linewidth = 0.2),
+#       plot.margin = ggplot2::margin(2.5, 2.5, 2.5, 2.5)
+#     ) +
+#     ggspatial::annotation_north_arrow(
+#       location = "tr",
+#       which_north = "true",
+#       style = ggspatial::north_arrow_fancy_orienteering,
+#       height = grid::unit(north_arrow_size, "cm"),
+#       width = grid::unit(north_arrow_size, "cm"),
+#       pad_x = grid::unit(0.1, "cm"),
+#       pad_y = grid::unit(0.1, "cm")
+#     ) +
+#     ggspatial::annotation_scale(
+#       location = annotation_scale_location,
+#       width_hint = 0.3
+#     )
+#   
+#   if (map_type == "risk") {
+#     p <- p +
+#       ggplot2::scale_fill_manual(
+#         name = legend_title,
+#         values = RISK_COLORS,
+#         na.value = "white",
+#         drop = FALSE
+#       )
+#   }
+#   
+#   if (map_type == "discharge") {
+#     p <- p +
+#       ggplot2::scale_fill_gradient(low = RColorBrewer::brewer.pal(name="Blues",9)[1],
+#                                    high =RColorBrewer::brewer.pal(name="Blues",9)[4] )
+# 
+#   }
+#   
+#   if (facet) {
+#     p <- p +
+#       ggplot2::facet_wrap(
+#         stats::as.formula(paste("~", facet_var)),
+#         nrow = nrow
+#       )
+#   }
+#   
+#   if (!is.null(rivers)) {
+#     p <- p +
+#       ggplot2::geom_sf(
+#         data = rivers,
+#         color = "blue",
+#         linewidth = 0.1,
+#         inherit.aes = FALSE
+#       )
+#   }
+#   
+#   if (!is.null(stations)) {
+#     p <- p +
+#       ggplot2::geom_sf(
+#         data = stations,
+#         color = "black",
+#         size = 1,
+#         inherit.aes = FALSE
+#       )
+#   }
+#   
+#   p
+# }
+
+
 build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
                              variable = "risk",
                              map_type = c("risk", "discharge"),
@@ -163,9 +271,18 @@ build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
                              nrow = NULL,
                              annotation_scale_location = c("bl","br","tl","tr"),
                              north_arrow_size = 1.5,
-                             legend_title = NULL) {
+                             title = "",
+                             title_size = 12,
+                             legend_title = NULL,
+                             source_text = NULL,
+                             source_x = -Inf,
+                             source_y = -Inf,
+                             source_hjust = -0.1,
+                             source_vjust = -0.5,
+                             source_size = 3.5) {
   
   map_type <- match.arg(map_type)
+  annotation_scale_location <- match.arg(annotation_scale_location)
   
   if (is.null(legend_title)) {
     legend_title <- ifelse(map_type == "risk", "Risk level", "Discharge (m³/s)")
@@ -183,15 +300,20 @@ build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
       fill = NA,
       linewidth = 0.2
     ) +
+    ggplot2::labs(
+      title = title
+    )+
     ggplot2::xlab("Longitude") +
     ggplot2::ylab("Latitude") +
     ggplot2::theme_minimal() +
     ggplot2::theme(
+      strip.text.x.top = ggplot2::element_text(size = title_size, face = "bold"),
       text = ggplot2::element_text(size = 14),
       axis.text = ggplot2::element_text(size = 14),
       axis.title.x = ggplot2::element_text(size = 15, face = "bold"),
       axis.title.y = ggplot2::element_text(size = 15, face = "bold"),
-      plot.title = ggplot2::element_text(face = "bold", size = 20),
+      plot.title = ggplot2::element_text(face = "bold",
+                                         size = title_size, hjust = 0.5),
       legend.position = "bottom",
       legend.key.width = grid::unit(2, "cm"),
       panel.background = ggplot2::element_rect(fill = "white"),
@@ -218,16 +340,29 @@ build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
         name = legend_title,
         values = RISK_COLORS,
         na.value = "white",
-        drop = FALSE
+        drop = TRUE
       )
   }
   
   if (map_type == "discharge") {
     p <- p +
-      ggplot2::scale_fill_viridis_c(
+      ggplot2::scale_fill_gradient(
         name = legend_title,
-        na.value = "white",
-        option = "C"
+        low = RColorBrewer::brewer.pal(name = "Blues", 9)[1],
+        high = RColorBrewer::brewer.pal(name = "Blues", 9)[4]
+      )
+  }
+  
+  if (!is.null(source_text)) {
+    p <- p +
+      ggplot2::annotate(
+        "text",
+        x = source_x,
+        y = source_y,
+        label = source_text,
+        hjust = source_hjust,
+        vjust = source_vjust,
+        size = source_size
       )
   }
   
@@ -262,6 +397,25 @@ build_fanfar_map <- function(data, country, rivers = NULL, stations = NULL,
   p
 }
 
+
+number_to_french <- function(x) {
+  
+  numbers <- c(
+    "0" = "zéro",
+    "1" = "un",
+    "2" = "deux",
+    "3" = "trois",
+    "4" = "quatre",
+    "5" = "cinq",
+    "6" = "six",
+    "7" = "sept",
+    "8" = "huit",
+    "9" = "neuf",
+    "10" = "dix"
+  )
+  
+  unname(numbers[as.character(x)])
+}
 # ============================================================
 # Compute dynamic map dimensions from spatial extent
 # ============================================================

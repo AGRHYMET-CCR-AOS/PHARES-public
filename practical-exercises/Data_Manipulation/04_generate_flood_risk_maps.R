@@ -2,7 +2,7 @@
 # EXERCISE 4 — Map PHARES forecast flood risk
 # Objective: Generate a flood risk map from PHARES NetCDF outputs
 # ============================================================
-
+install.packages(c("ncdf4","sf","dplyr","ggplot2","ggspatial"))
 library(ncdf4)
 library(sf)
 library(dplyr)

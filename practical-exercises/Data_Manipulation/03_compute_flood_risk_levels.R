@@ -31,5 +31,6 @@ risk_manual <- ifelse(
     )
   )
 )
+View(risk_manual)
 
 nc_close(frct)

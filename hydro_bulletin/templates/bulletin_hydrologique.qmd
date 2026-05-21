@@ -83,6 +83,29 @@ hydrograph_path <- file.path(
 )
 ```
 
+```{r caption, echo=FALSE}
+n_day <- config$bulletin$forecast_horizon_days
+fig1 <- if (n_day == 1) {
+  "Figure 1. Situation hydrologique maximale attendue attendue demain"
+} else {
+  sprintf(
+    "Figure 1. Situation hydrologique maximale attendue au cours des %s (%s) prochains jours.",
+    number_to_french(n_day),
+    n_day
+  )
+}
+
+fig2 <- if (n_day == 1) {
+  "Figure 1. Situation hydrologique attendue demain"
+} else {
+  sprintf(
+    "Figure 1. Situation hydrologique attendue au cours des %s (%s) prochains jours.",
+    number_to_french(n_day),
+    n_day
+  )
+}
+```
+
 # N° du bulletin : `r params$bulletin_number` - Date d’émission : `r params$issue_date` - Date de validité : `r params$validity_date`
 
 ------------------------------------------------------------------------
@@ -101,11 +124,11 @@ cat(
 cat(regional_comment)
 ```
 
-```{r max-risk-map,echo=FALSE,fig.align='center',fig.cap= "Figure 1. Situation hydrologique maximale attendue au cours des dix (10) prochains jours.",out.width="60%"}
+```{r max-risk-map,echo=FALSE,fig.align='center',fig.cap=fig1,out.width="100%"}
 knitr::include_graphics(max_risk_map_path)
 ```
 
-```{r d10-risk-map,echo=FALSE,fig.align='center',fig.cap= "Figure 2. Situation hydrologique au cours des dix (10) prochains jours.",out.width="100%"}
+```{r d10-risk-map,echo=FALSE,fig.align='center',fig.cap=fig2,out.width="100%"}
 knitr::include_graphics(d10_risk_map_path)
 ```
 

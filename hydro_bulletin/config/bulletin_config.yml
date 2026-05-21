@@ -7,7 +7,8 @@ bulletin:
   forecast_horizon_days: 5
 
 Data_Processing:
-    country_code: 'NGA'
+    country_code: 'LBR'
+    nc_files_directory_path: "data/raw/fanfar"
     countries_shp : "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin/data/statics/was_contries.shp"
     subbassins_shp : "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin/data/statics/subbasins.shp"
     rivers_shp : "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/PRESASS/PRESASS2026/data/statics/was_rivers.shp"
@@ -18,16 +19,17 @@ figures:
     output_path: "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin/outputs/figures"
     logo_path: NULL
     max_risk_map:
-        width: 10
+        width: 14
         height: 8
     daily_risk_map:
         facet_nrow: 2
         width: 16
-        height: 6
+        height: 8
     hydrograph:
         width: 14
         height: 10
-
+project:
+    path: "D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin"
 outputs:
   pdf: true
   word: true
