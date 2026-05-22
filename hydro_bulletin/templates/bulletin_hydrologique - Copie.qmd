@@ -1,0 +1,135 @@
+---
+title: ""
+format:
+  pdf:
+    toc: false
+    number-sections: false
+  docx: default
+  html:
+    css: styles.css
+params:
+  bulletin_number: "002-2026"
+  issue_date: "27/04/2026"
+  validity_date: "03/05/2026"
+  institution: "AGRHYMET CCR-AOS"
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(glue)
+
+# Charger les fonctions
+source("R/06_generate_key_messages.R")
+source("R/07_generate_hydro_comments.R")
+
+# Exemple (à remplacer par ton vrai traitement)
+forecast_summary <- tibble::tribble(
+  ~zone, ~country, ~basin, ~severity, ~is_artifact,
+  "Bassin du Lac Tchad", "Tchad - Nord Cameroun", "Logone-Chari", 2, FALSE,
+  "Sous-bassin Tchad", "Tchad", "Artefact", 3, TRUE
+)
+
+# Nettoyage artefact
+forecast_clean <- forecast_summary %>%
+  filter(!is_artifact)
+
+# Génération automatique
+key_messages <- generate_key_messages(forecast_clean)
+hydro_comment <- generate_hydro_comment(forecast_clean)
+```
+
+------------------------------------------------------------------------
+
+# 🟢 AGRHYMET CCR-AOS
+
+**Bulletin de prévision hydrologique**
+
+**N° du bulletin :** `r params$bulletin_number`\
+**Date d’émission :** `r params$issue_date`\
+**Date de validité :** `r params$validity_date`
+
+------------------------------------------------------------------------
+
+## Résumé exécutif
+
+Au cours des dix (10) prochains jours, la situation hydrologique devrait rester **globalement normale** sur l’ensemble de la région AGRHYMET, sans indication de crue généralisée.
+
+Des **signaux localisés de risque modéré** sont toutefois observés dans certaines zones, notamment dans le bassin du Lac Tchad, nécessitant une vigilance.
+
+------------------------------------------------------------------------
+
+## Messages clés
+
+```{r, results='asis', echo=FALSE}
+cat(paste0("- ", key_messages, collapse = "\n"))
+```
+
+------------------------------------------------------------------------
+
+## Situation hydrologique prévue (10 jours)
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("outputs/figures/fanfar_map.png")
+```
+
+------------------------------------------------------------------------
+
+## Analyse hydrologique
+
+```{r, results='asis', echo=FALSE}
+cat(hydro_comment)
+```
+
+------------------------------------------------------------------------
+
+## Zones sous vigilance
+
+-   Bassin du Lac Tchad (Tchad – Nord Cameroun)
+-   Zones présentant des signaux de risque modéré
+
+------------------------------------------------------------------------
+
+## Impacts potentiels
+
+-   Débordements ponctuels de cours d’eau\
+-   Inondations localisées de faible ampleur\
+-   Perturbations des activités agricoles en zones basses
+
+------------------------------------------------------------------------
+
+## 🟩 Recommandations
+
+-   Maintenir un **suivi régulier des niveaux d’eau**
+-   Renforcer la **vigilance dans les zones à risque**
+-   Sensibiliser les populations riveraines
+
+------------------------------------------------------------------------
+
+## Note méthodologique
+
+Ce bulletin est basé sur les sorties du système opérationnel de prévision hydrologique **FANFAR**, fournissant des prévisions sur un horizon de 10 jours.
+
+Les niveaux de risque sont classés comme suit :
+
+-   🟢 Normal\
+-   🟡 Risque faible\
+-   🟠 Risque modéré\
+-   🔴 Risque élevé
+
+------------------------------------------------------------------------
+
+## 🟩 Sources
+
+-   Système FANFAR\
+-   AGRHYMET CCR-AOS
+
+------------------------------------------------------------------------
+
+## 🟩 Contact
+
+AGRHYMET CCR-AOS\
+BP 11011 Niamey – Niger\
+📧 administration.agrhymet\@cilss.int\
+🌐 <https://agrhymet.cilss.int>
+
+------------------------------------------------------------------------

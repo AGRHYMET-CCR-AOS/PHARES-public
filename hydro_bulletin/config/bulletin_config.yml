@@ -1,0 +1,38 @@
+bulletin:
+  institution: 'AGRHYMET CCR-AOS'
+  title: 'Bulletin de prévision hydrologique'
+  number: '001-2026'
+  issue_date: '2026-04-27'
+  validity_date: '2026-05-03'
+  forecast_horizon_days: 5
+
+Data_Processing:
+    country_code: 'BFA'
+    nc_files_directory_path: "data/raw/fanfar"
+    countries_shp : "data/statics/was_contries.shp"
+    subbassins_shp : "data/statics/subbasins.shp"
+    rivers_shp : "data/statics/was_rivers.shp"
+    stations_shp : NULL
+    stations_csv : "data/statics/abn_outlets_lev5.csv"
+    
+figures:
+    output_path: "outputs/figures"
+    logo_path: NULL
+    max_risk_map:
+        width: 14
+        height: 8
+    daily_risk_map:
+        facet_nrow: 2
+        width: 16
+        height: 8
+    hydrograph:
+        width: 14
+        height: 10
+project:
+    path: ""
+outputs:
+  pdf: true
+  word: true
+  html: true
+  language: 'fr'
+  

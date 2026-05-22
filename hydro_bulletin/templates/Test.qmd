@@ -1,0 +1,102 @@
+---
+title: "Bulletin de prévision hydrologique"
+format: 
+  docx:
+    reference-doc: reference_doc.docx
+editor: visual
+---
+
+
+# N° du bulletin : 002-2026 - Date d’émission : 27/04/2026 - Date de validité : 03/05/2026
+
+
+# Messages clés
+
+Au cours des dix (10) prochains jours, la situation hydrologique devrait rester **globalement normale** sur l’ensemble de la région AGRHYMET, sans indication de crue généralisée.
+
+Des **signaux localisés de risque modéré** sont toutefois observés dans certaines zones, notamment dans le bassin du Lac Tchad, nécessitant une vigilance.
+
+# Perspectives hydrologiques décadaires
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin/outputs/figures/seuil_20250803.png")
+```
+
+
+## Situation des écoulements au niveau des principales stations
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("D:/CCR_AOS/ACTIVITES/AGRHYMET/2026/DCEM/Dev/bulletin/hydro_bulletin/outputs/figures/hydrographs_forecast.png")
+```
+
+
+# Zones sous vigilance
+
+-   Bassin du Lac Tchad (Tchad – Nord Cameroun)
+-   Zones présentant des signaux de risque modéré
+
+## Impacts potentiels
+
+-   Débordements ponctuels de cours d’eau\
+-   Inondations localisées de faible ampleur\
+-   Perturbations des activités agricoles en zones basses
+
+
+## 🟩 Recommandations
+
+-   Maintenir un **suivi régulier des niveaux d’eau**
+-   Renforcer la **vigilance dans les zones à risque**
+-   Sensibiliser les populations riveraines
+
+
+## Note méthodologique
+
+Ce bulletin est basé sur les sorties du système opérationnel de prévision hydrologique **FANFAR**, fournissant des prévisions sur un horizon de 10 jours.
+
+Les niveaux de risque sont classés comme suit :
+
+-   🟢 Normal
+-   🟡 Risque faible
+-   🟠 Risque modéré
+-   🔴 Risque élevé
+
+
+
+
+# Impacts potentiels
+
+-   Débordements ponctuels de cours d’eau
+-   Inondations localisées de faible ampleur
+-   Perturbations possibles des activités agricoles et pastorales en zones basses
+-   Difficultés d’accès localisées dans certaines zones riveraines
+
+
+
+# Recommandations
+
+-   Maintenir un suivi régulier des niveaux d’eau
+-   Renforcer la vigilance dans les zones présentant un risque modéré
+-   Assurer un suivi rapproché des stations sous surveillance
+-   Sensibiliser les populations riveraines exposées
+
+------------------------------------------------------------------------
+
+# Note méthodologique
+
+Ce bulletin est basé sur les sorties du système opérationnel de prévision hydrologique **FANFAR**, fournissant des prévisions hydrologiques sur un horizon de dix (10) jours.
+
+Les niveaux de risque sont classés comme suit :
+
+-   🟢 Situation normale
+-   🟡 Risque faible
+-   🟠 Risque modéré
+-   🔴 Risque élevé
+
+Certains signaux identifiés comme artefacts récurrents du système sont exclus de l’analyse opérationnelle.
+
+------------------------------------------------------------------------
+
+# Sources
+
+-   Système FANFAR
+-   AGRHYMET CCR-AOS
